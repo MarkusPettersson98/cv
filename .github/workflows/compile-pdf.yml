@@ -1,0 +1,19 @@
+name: Publish CV as PDF
+on:
+  push:
+    tags:
+      - '**'
+jobs:
+  Compile-PDF:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Compile resume
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: cv.tex
+      - name: Publish to Github Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: cv.pdf
